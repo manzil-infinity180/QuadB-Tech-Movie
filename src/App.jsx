@@ -5,7 +5,11 @@ import { BoxLeft } from "./component/BoxLeft";
 import { Main } from "./component/Main";
 import { MovieProvider } from "./utils/useMovie";
 import { MovieDetails } from "./component/MovieDetails";
-import {Toaster} from "react-hot-toast"
+import {Toaster } from "react-hot-toast"
+import {createBrowserRouter,RouterProvider} from "react-router-dom";
+import {Logo} from './component/Logo';
+import { AllMovies } from "./component/AllMovies";
+import { BookYourTicket } from "./component/BookYourTicket";
 export const tempMovieData = [
   {
     imdbID: "tt10329042",
@@ -64,6 +68,19 @@ export const tempWatchedData = [
     userRating: 9,
   },
 ];
+const router = createBrowserRouter([
+  {
+    path :'/',
+    element :<AllMovies />
+  },
+  {
+    path:'/:id',
+    element : <BookYourTicket />
+  }
+]);
+  
+
+  
 
 
 export default function App() { 
@@ -71,21 +88,17 @@ export default function App() {
     async function fetchFunction(){
           const res = await fetch(`https://api.tvmaze.com/search/shows?q=all`);
           const data = await res.json();
-          // console.log(data);
+         
     }
     fetchFunction();
   },[]);
 
   return (
     <>
-      <MovieProvider>
-     <Navbar />
-     <Main>
-       <BoxLeft />
-       <BoxRight />
-      </Main>  
-      </MovieProvider>
-      <Toaster
+    <MovieProvider>
+    <RouterProvider router={router} />
+    </MovieProvider>
+    <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{
@@ -118,6 +131,12 @@ export default function App() {
           },
         }}
       />
+    
+      {/* <AllMovies /> */}
+      
+      {/* <BrowserRouter>
+      <Route path="/:id" element={<Logo />}/>
+      </BrowserRouter> */}
     </>
   );
 }

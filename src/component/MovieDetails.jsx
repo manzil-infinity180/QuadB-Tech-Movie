@@ -4,6 +4,7 @@ import { useMovie } from "../utils/useMovie";
 import parse from "html-react-parser"
 import toast from "react-hot-toast";
 import { BoxRight } from "./BoxRight";
+import { Link,useNavigate } from "react-router-dom";
 export const tempWatchedData = [
   {
     externals: {imdb: "tt1375666"},
@@ -21,10 +22,12 @@ original: "https://static.tvmaze.com/uploads/images/original_untouched/128/32102
   
 ];
 export function MovieDetails(){
+    
     const {movie,isOpen2,setIsOpen2} = useMovie();
     const [watched,setWatched] = useLocalStorageState(tempWatchedData,'watched');
     const [isAddMovie,setIsAddMovie] = useState(false);
     const [item,setItem] = useState([]);
+    const navigate = useNavigate();
 const {
   name : title,
   language,
@@ -50,7 +53,7 @@ const currentMovie = {
 // console.log(currentMovie);
 function handleWatchedMovie(movie){
   setWatched((watched)=> [...watched,movie]);
-  toast.success("New Movie Added!!! Check watchlist 🕹️")
+  toast.success("New Movie Added!!! Check watchlist 🕹️");
 }
 
 
@@ -90,7 +93,7 @@ function onCloseMovie(){
              
              <p>Add to WatchList</p>
              <button className="btn-add" onClick={()=>handleWatchedMovie(currentMovie)}>+ Add to List</button>
-              
+             <Link type="button" to={externals.imdb} className="btn-add" style={{textDecoration:"none"}}>📇 Book Your Ticket</Link>
               </div>
           
           {/* <em>{plot}</em> */}

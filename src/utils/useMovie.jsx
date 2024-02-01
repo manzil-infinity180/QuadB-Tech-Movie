@@ -43,15 +43,7 @@ function MovieProvider({children}){
                 console.log(data);
                 setMovie(data);
                 setIsOpen2(false);
-                // console.log(data.show);
-                // setMovies(data);
-                // console.log(program);
-                // console.log(data[0].show.language)
-                // console.log(data[0].show.image.original);
-                // console.log(data[0].show.summary);
-                // console.log(data[0].show.url);
-                // console.log(data[0].show.name)
-                // console.log(data[0].show.premiered.slice(0,4))
+                
             }catch(err){
                  console.log(err);
             }finally{
