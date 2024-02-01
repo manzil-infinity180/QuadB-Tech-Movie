@@ -36,8 +36,8 @@ export function BoxLeft(){
                     <p>
                       <span>🗓</span>
                       <span>{movie.show.premiered===null? "N/A" : movie.show.premiered}</span>
-                      <span> 🔊 </span>
-                      <span>{movie.show.language}</span>
+                      <span> 💽 </span>
+                      <span>{movie.show.status}</span>
                       <span>⭐️</span>
                       <span>{movie.show.rating.average===null? 4.5 : movie.show.rating.average}</span>
                     </p>

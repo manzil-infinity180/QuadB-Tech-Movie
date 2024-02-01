@@ -22,12 +22,27 @@ original: "https://static.tvmaze.com/uploads/images/original_untouched/128/32102
   
 ];
 export function MovieDetails(){
-    
+    const value = {
+      externals: {imdb: "tt1375666"},
+      title: "All soul",
+      status: "ended",
+      poster:
+        {
+          medium: "https://static.tvmaze.com/uploads/images/medium_portrait/128/321026.jpg",
+  original: "https://static.tvmaze.com/uploads/images/original_untouched/128/321026.jpg"
+      },
+        rating:{
+          average:4.5
+        }
+    }
     const {movie,isOpen2,setIsOpen2} = useMovie();
-    const [watched,setWatched] = useLocalStorageState(tempWatchedData,'watched');
+    const [watched,setWatched] = useLocalStorageState([value],'watched');
     const [isAddMovie,setIsAddMovie] = useState(false);
     const [item,setItem] = useState([]);
     const navigate = useNavigate();
+
+    
+    // setWatched(tempWatchedData);
 const {
   name : title,
   language,

@@ -9,6 +9,7 @@ import {Toaster } from "react-hot-toast"
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import { AllMovies } from "./component/AllMovies";
 import { BookYourTicket } from "./component/BookYourTicket";
+localStorage.setItem([],"watched");
 export const tempMovieData = [
   {
     imdbID: "tt10329042",
