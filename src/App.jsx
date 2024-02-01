@@ -4,7 +4,8 @@ import { Navbar } from "./component/Navbar";
 import { BoxLeft } from "./component/BoxLeft";
 import { Main } from "./component/Main";
 import { MovieProvider } from "./utils/useMovie";
-
+import { MovieDetails } from "./component/MovieDetails";
+import {Toaster} from "react-hot-toast"
 export const tempMovieData = [
   {
     imdbID: "tt10329042",
@@ -84,6 +85,39 @@ export default function App() {
        <BoxRight />
       </Main>  
       </MovieProvider>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          success: {
+            style: {
+              fontSize:"1.3rem",
+              backgroundColor: "white",
+              color: "green",
+              border: "1px solid green",
+              padding: "25px",
+              marginRight: "20px",
+            },
+            iconTheme: {
+              primary: "green",
+              secondary: "white",
+            },
+          },
+          error: {
+            style: {
+              backgroundColor: "white",
+              color: "red",
+              border: "1px solid red",
+              padding: "15px",
+              marginRight: "20px",
+            },
+            iconTheme: {
+              primary: "red",
+              secondary: "white",
+            },
+          },
+        }}
+      />
     </>
   );
 }

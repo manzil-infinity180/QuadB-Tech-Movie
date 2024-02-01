@@ -2,19 +2,20 @@ import { useMemo, useState } from "react";
 import {tempWatchedData} from "../App.jsx";
 import { useMovie } from "../utils/useMovie.jsx";
 import { MovieDetails } from "./MovieDetails.jsx";
+import { useLocalStorageState } from "../utils/useLocalStorageState.js";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 export function BoxRight(){
+ 
+const localdata = localStorage.getItem("watched");
+console.log(JSON.parse(localdata));
 
-  // const [isOpen2, setIsOpen2] = useState(true);
-const [watched, setWatched] = useState(tempWatchedData);
-// const watched = localStorage.getItem("watched");
+const watched = JSON.parse(localdata);
+// const [watched,setWatched] = useLocalStorageState(x,"watched");
+// const [watched,setWatched] = useState(tempWatchedData);
 
-const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-const avgUserRating = average(watched.map((movie) => movie.userRating));
-const avgRuntime = average(watched.map((movie) => movie.runtime));
 
 const {movie,isOpen2,setIsOpen2} = useMovie();
 const {
@@ -40,7 +41,8 @@ movie.name!==undefined && console.log({
   summary
 })
   return (
-    <div className="box">
+    <>
+    {watched && <div className="box">
     <button
       className="btn-toggle"
       onClick={() => setIsOpen2((open) => !open)}
@@ -60,37 +62,26 @@ movie.name!==undefined && console.log({
               <span>{watched.length} movies</span>
             </p>
             <p>
-              <span>⭐️</span>
-              <span>{avgImdbRating}</span>
-            </p>
-            <p>
-              <span>🌟</span>
-              <span>{avgUserRating}</span>
-            </p>
-            <p>
-              <span>⏳</span>
-              <span>{avgRuntime} min</span>
+              <span>💿</span>
+              <span>Status</span>
             </p>
           </div>
         </div>
 
         <ul className="list">
           {watched.map((movie) => (
-            <li key={movie.imdbID}>
-              <img src={movie.Poster} alt={`${movie.Title} poster`} />
-              <h3>{movie.Title}</h3>
+            
+            <li key={movie.externals.imdb}>
+              <img src={movie.poster?.original} alt={`${movie.title} poster`} />
+              <h3>{movie.title}</h3>
               <div>
                 <p>
                   <span>⭐️</span>
-                  <span>{movie.imdbRating}</span>
+                  <span>{movie.rating.average!==null ? movie.rating.average : 4.5}</span>
                 </p>
                 <p>
-                  <span>🌟</span>
-                  <span>{movie.userRating}</span>
-                </p>
-                <p>
-                  <span>⏳</span>
-                  <span>{movie.runtime} min</span>
+                  <span>💽</span>
+                  <span>{movie.status}</span>
                 </p>
               </div>
             </li>
@@ -98,6 +89,7 @@ movie.name!==undefined && console.log({
         </ul>
       </>
     )}
-  </div>
+  </div>}
+  </>
   )
 }

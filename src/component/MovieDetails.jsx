@@ -1,10 +1,30 @@
+import { useState } from "react";
 import { useLocalStorageState } from "../utils/useLocalStorageState";
 import { useMovie } from "../utils/useMovie";
-
-
+import parse from "html-react-parser"
+import toast from "react-hot-toast";
+import { BoxRight } from "./BoxRight";
+export const tempWatchedData = [
+  {
+    externals: {imdb: "tt1375666"},
+    title: "All soul",
+    status: "ended",
+    poster:
+      {
+        medium: "https://static.tvmaze.com/uploads/images/medium_portrait/128/321026.jpg",
+original: "https://static.tvmaze.com/uploads/images/original_untouched/128/321026.jpg"
+    },
+      rating:{
+        average:4.5
+      }
+  },
+  
+];
 export function MovieDetails(){
     const {movie,isOpen2,setIsOpen2} = useMovie();
-    const [watched,setWatched] = useLocalStorageState([],'watched');
+    const [watched,setWatched] = useLocalStorageState(tempWatchedData,'watched');
+    const [isAddMovie,setIsAddMovie] = useState(false);
+    const [item,setItem] = useState([]);
 const {
   name : title,
   language,
@@ -15,27 +35,29 @@ const {
   summary,
   rating,
   genres,
-  network
+  network,
+  externals,
+  status
 
 } = movie
-function handleWatchedMovie(movie){
-    setWatched((watched)=> [...watched,movie]);
-  }
-function handleWatchedList(){
-    const watched = {title,
-        language,
-        runtime,
-        date,
-        url,
-        poster,
-        summary,
-        rating,
-        genres,
-        network}
-        setWatched((watched)=> [...watched,]);
-console.log(watched);
+const currentMovie = {
+  title,
+  poster,
+  rating,
+  externals,
+  status
 }
-const plot = summary.replace('<b>',"").replace('</b>',"").replace('<p>',"").replace('</p>',"");
+// console.log(currentMovie);
+function handleWatchedMovie(movie){
+  setWatched((watched)=> [...watched,movie]);
+  toast.success("New Movie Added!!! Check watchlist 🕹️")
+}
+
+
+// function handleWatchedList(movie){
+//   setWatched((watched)=>[...watched,movie])}
+
+// const plot =parse(summary)
 function onCloseMovie(){
     setIsOpen2(!isOpen2);
 }
@@ -67,22 +89,22 @@ function onCloseMovie(){
             <div className="rating">
              
              <p>Add to WatchList</p>
-             <button className="btn-add" onClick={handleWatchedList} >+ Add to List</button>
+             <button className="btn-add" onClick={()=>handleWatchedMovie(currentMovie)}>+ Add to List</button>
               
               </div>
           
-          <em>{plot}</em>
+          {/* <em>{plot}</em> */}
           {network && <p>Network: {network?.name}</p>}
           <a href={url} style={{color:"white",textDecoration:"none"}}><p>Official-Site</p></a>  
           <p>
             {genres.map((x)=> {x})}
           </p>
-              
-            
             </section>
-         
-            
 
-          
+            {
+              isAddMovie && <BoxRight/>
+            }
+
+            
   </div>
 }
