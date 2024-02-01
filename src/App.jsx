@@ -7,7 +7,6 @@ import { MovieProvider } from "./utils/useMovie";
 import { MovieDetails } from "./component/MovieDetails";
 import {Toaster } from "react-hot-toast"
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
-import {Logo} from './component/Logo';
 import { AllMovies } from "./component/AllMovies";
 import { BookYourTicket } from "./component/BookYourTicket";
 export const tempMovieData = [

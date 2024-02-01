@@ -36,17 +36,17 @@ export function BookYourTicket(){
       <img src={movie.image?.original}  style={{width:"20%",textAlign:"center"}}/>
     <form>
     {/* <label htmlFor="fname">Movie</label> */}
-    <input type="text" id="fname" name="moviename" placeholder="Movie" value={movie.name}/>
+    <input type="text"  className="input-booking" id="fname" name="moviename" placeholder="Movie" value={movie.name}/>
 
     {/* <label htmlFor="fname">First Name</label> */}
-    <input type="text" id="fname" name="firstname" placeholder="Your name.." value={name} onChange={(e)=>setName(e.target.value)} />
+    <input type="text" className="input-booking" id="fname" name="firstname" placeholder="Your name.." value={name} onChange={(e)=>setName(e.target.value)} />
 
     {/* <label htmlFor="lname">Last Name</label> */}
-    <input type="text" id="lname" name="lastname" placeholder="Your last name.."
+    <input type="text" className="input-booking" id="lname" name="lastname" placeholder="Your last name.."
     value={email} onChange={(e)=>setEmail(e.target.value)} />
 
     {/* <label htmlFor="country">Country</label> */}
-   <input type="number" className="input-num" placeholder="Number of ticket"
+   <input type="number"  className="input-num" placeholder="Number of ticket"
    value={ticket} onChange={(e)=>setTicket(e.target.value)}/>
   
   </form>

@@ -11,10 +11,10 @@ export function BoxRight(){
  
 const localdata = localStorage.getItem("watched");
 console.log(JSON.parse(localdata));
-
 const watched = JSON.parse(localdata);
 // const [watched,setWatched] = useLocalStorageState(x,"watched");
 // const [watched,setWatched] = useState(tempWatchedData);
+// const watched = movie;
 
 
 const {movie,isOpen2,setIsOpen2} = useMovie();
@@ -42,7 +42,54 @@ movie.name!==undefined && console.log({
 })
   return (
     <>
-    {watched && <div className="box">
+    {watched===null ? <div className="box">
+    <button
+      className="btn-toggle"
+      onClick={() => setIsOpen2((open) => !open)}
+    >
+      {isOpen2 ? "–" : "+"}
+    </button>
+    {
+      isOpen2===false && <MovieDetails />
+    }
+    {isOpen2 && (
+      <>
+        <div className="summary">
+          <h2>Movies you watched</h2>
+          <div>
+            <p>
+              <span>#️⃣</span>
+              <span>{watched.length} movies</span>
+            </p>
+            <p>
+              <span>💿</span>
+              <span>Status</span>
+            </p>
+          </div>
+        </div>
+
+        <ul className="list">
+          {watched.map((movie) => (
+            
+            <li key={movie.externals.imdb}>
+              <img src={movie.poster?.original} alt={`${movie.title} poster`} />
+              <h3>{movie.title}</h3>
+              <div>
+                <p>
+                  <span>⭐️</span>
+                  <span>{movie.rating.average!==null ? movie.rating.average : 4.5}</span>
+                </p>
+                <p>
+                  <span>💽</span>
+                  <span>{movie.status}</span>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </div> : <div className="box">
     <button
       className="btn-toggle"
       onClick={() => setIsOpen2((open) => !open)}

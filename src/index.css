@@ -340,7 +340,7 @@ body {
 }
 
 .booking-div {
-  margin: 150px;
+  margin: 100px;
   display: flex;
   border-radius: 5px;
   background-color: #f2f2f2;
@@ -358,7 +358,7 @@ body {
   border-radius: 4px;
   cursor: pointer;}
 
-  input[type=text], select, .input-num {
+  .input-booking, select, .input-num {
     width: 50%;
     padding: 12px 20px;
     margin: 8px 5px;
